@@ -1,0 +1,204 @@
+.pokedex-entry-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--gb-black);
+  border: 8px solid var(--gb-red-border);
+  box-shadow: inset 0 0 0 2px var(--gb-white);
+  display: flex;
+  flex-direction: column;
+  color: var(--gb-white);
+  position: relative;
+  aspect-ratio: 10 / 9;
+  /* 1. Forzar Aspect Ratio (160x144) */
+  padding: 0 2px;
+  /* 1. Margen lateral extra dentro de la línea blanca */
+}
+
+.loading-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: black;
+}
+
+/* Mitad Superior */
+.top-half {
+  display: flex;
+  padding: 10px;
+  gap: 6px;
+  height: 110px;
+  /* Altura fija para asegurar alineación */
+  flex-shrink: 0;
+}
+
+.entry-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  /* 2. Reducir espacio entre caja y número */
+  margin-left: 0px;
+}
+
+.entry-sprite-box {
+  width: 100px;
+  aspect-ratio: 1;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* 2. Alinear sprite al fondo */
+  padding-bottom: 6px;
+  /* Ajuste fino para el sprite */
+  transform: translate(-8px, -5px);
+}
+
+.entry-sprite-box img {
+  width: 56px;
+  height: 56px;
+  scale: 1.65;
+  object-fit: none;
+  object-position: center;
+  transform: translate(-2px, -10px);
+}
+
+.entry-number {
+  display: flex;
+  gap: 0px;
+  transform: translate(4px, -6px);
+}
+
+.no-label {
+  font-size: 8px;
+  padding-top: 3.5px;
+  font-weight: bold;
+}
+
+.no-value {
+  font-size: 12.5px;
+}
+
+.entry-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entry-name {
+  font-size: 14px;
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+
+.entry-category {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.entry-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  /* 3. Columnas separadas a los extremos */
+  font-size: 14px;
+}
+
+.stat-row .value {
+  text-align: right;
+}
+
+/* Separador */
+.separator-line {
+  height: 3px;
+  background-color: var(--gb-red-border);
+  position: relative;
+  margin-bottom: 0px;
+  z-index: 1;
+  width: 97%;
+  transform: translate(2px, 5px);
+  margin-top: 15px;
+  flex-shrink: 0;
+}
+
+
+.page-tab {
+  position: absolute;
+  bottom: 0;
+  /* 4. Apoyado sobre la línea */
+  left: 0;
+  background-color: var(--gb-black);
+  color: var(--gb-white);
+  border: 3px solid var(--gb-red-border);
+  /* 4. Borde blanco */
+  padding: 2px 2px;
+  font-size: 4px;
+}
+
+/* Mitad Inferior */
+.bottom-half {
+  padding: 2px 12px;
+  height: 110px;
+  /* Altura fija absoluta */
+  overflow: hidden;
+  /* Opcional: para cortar el texto sobrante si lo prefieres */
+  flex-shrink: 0;
+}
+
+.menu-pill span.selected {
+  color: #f8d050;
+}
+
+
+.flavor-text {
+  font-size: 11px;
+  line-height: 2;
+  /* Interlineado amplio original */
+  margin: 1px;
+}
+
+/* Menú Inferior */
+.entry-menu {
+  background-color: var(--gb-red-border);
+  padding: 4px 0px;
+  /* 5. Reducir padding rojo */
+  flex-grow: 1;
+  /* Ocupar espacio restante */
+  display: flex;
+  margin: 0 -2px;
+  /* Extender para cubrir bordes laterales y conectar línea */
+  border-top: 2px solid var(--gb-white);
+  /* Línea blanca de cierre */
+}
+
+.menu-pill {
+  background-color: var(--gb-black);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0;
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  /* 5. Maximizar altura de la píldora */
+  transform: translateY(4px);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:active {
+  color: #f8d050;
+}

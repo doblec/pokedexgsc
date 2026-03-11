@@ -1,0 +1,38 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.gameboy-screen {
+  width: 320px; /* Resolución escalada de GBC (160px original x 2) */
+  height: 288px; /* 144px original x 2 */
+  background-color: #000;
+  border: 10px solid #404040;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  overflow: hidden;
+  position: relative;
+  transform: scale(2);
+  margin: 144px 0;
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+}
+
+.loading-text {
+  color: white;
+  text-align: center;
+  margin-top: 100px;
+  font-family: var(--font-main);
+}
+
+.instructions {
+  color: #888;
+  font-family: sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
+}

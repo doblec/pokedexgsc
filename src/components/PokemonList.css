@@ -1,0 +1,124 @@
+.pokedex-list-container {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 1fr 24px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gb-black);
+  color: var(--gb-white);
+  font-size: 12px;
+}
+
+/* Izquierda */
+.left-column {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sprite-box {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: var(--gb-green-light);
+  border: 2px solid var(--gb-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.monochrome-sprite {
+  width: 64px;
+  height: 64px;
+  filter: grayscale(100%) brightness(0.6) sepia(1) hue-rotate(70deg) saturate(3);
+  /* Truco para simular el tinte verde oscuro de GBC */
+}
+
+.counters-box {
+  background-color: var(--gb-black);
+  border: 2px solid var(--gb-white);
+  padding: 4px;
+  font-size: 10px;
+}
+
+.counter-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Derecha (Lista) */
+.right-column {
+  overflow-y: auto;
+  padding-left: 8px;
+  padding-right: 4px;
+}
+
+.list-item {
+  margin-bottom: 4px;
+  padding: 2px;
+  border: 2px solid transparent; /* Espacio reservado para el cursor */
+  cursor: pointer;
+}
+
+.item-number {
+  padding-left: 20px;
+}
+
+.item-name-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Cursor de Selección Estilo GSC */
+.list-item.selected {
+  border: 2px solid #f8d050; /* Verde/Amarillo brillante */
+  background-color: transparent;
+  position: relative;
+  animation: blink-border 1s infinite;
+}
+
+.list-item.selected::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #f8d050;
+}
+
+.list-item.selected::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #f8d050;
+}
+
+@keyframes blink-border {
+  0%, 100% { border-color: #f8d050; }
+  50% { border-color: #a08020; }
+}
+
+/* Barra Inferior */
+.bottom-bar {
+  grid-column: 1 / -1;
+  background-color: var(--gb-red-ui);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.pill-button {
+  background: black;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 8px;
+}

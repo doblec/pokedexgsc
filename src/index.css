@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'PokemonGB';
+  src: url('./assets/fonts/PokemonGb-RAeo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --gb-black: #000000;
+  --gb-white: #f8f8f8;
+  --gb-green-light: #d0f8d0; /* Fondo sprite lista */
+  --gb-green-dark: #306850;  /* Tinte sprite lista */
+  --gb-red-ui: #d85030;      /* Barra inferior lista */
+  --gb-red-border: #a04040;  /* Borde detalle */
+  --gb-cursor: #f8a050;      /* Color cursor */
+  --font-main: 'PokemonGB', 'Press Start 2P', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+}
+
+/* Utilidades de texto */
+.text-uppercase { text-transform: uppercase; }
+.text-white { color: var(--gb-white); }
+.text-black { color: var(--gb-black); }
+
+/* Scrollbar oculta para mantener estética */
+::-webkit-scrollbar {
+  display: none;
+}
