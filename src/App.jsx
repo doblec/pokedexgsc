@@ -23,26 +23,20 @@ function App() {
       {/* Contenedor físico de la pantalla (Estética) */}
       <div className="gameboy-screen">
         <div className="screen-content">
-          {loading ? (
-            <div className="loading-text">LOADING POKEDEX...</div>
-          ) : (
-            <>
-              {view === 'LIST' && (
-                <PokemonList
-                  list={pokemonList}
-                  selectedId={selectedId}
-                  onSelect={setSelectedId}
-                  onConfirm={handleSelectPokemon}
-                />
-              )}
-              {view === 'ENTRY' && (
-                <PokemonEntry
-                  id={selectedId}
-                  onBack={handleBackToList}
-                  onIdChange={setSelectedId}
-                />
-              )}
-            </>
+          {view === 'LIST' && (
+            <PokemonList
+              list={pokemonList}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+              onConfirm={handleSelectPokemon}
+            />
+          )}
+          {view === 'ENTRY' && (
+            <PokemonEntry
+              id={selectedId}
+              onBack={handleBackToList}
+              onIdChange={setSelectedId}
+            />
           )}
         </div>
       </div>

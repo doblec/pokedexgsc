@@ -48,6 +48,7 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
               className="monochrome-sprite"
             />
           )}
+          <div className="sprite-overlay"></div>
         </div>
         <div className="counters-box">
           <div className="counter-block">

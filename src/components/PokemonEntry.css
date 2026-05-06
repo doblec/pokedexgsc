@@ -14,16 +14,6 @@
   /* 1. Margen lateral extra dentro de la línea blanca */
 }
 
-.loading-screen {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background: black;
-}
-
 /* Mitad Superior */
 .top-half {
   display: flex;

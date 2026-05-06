@@ -20,26 +20,47 @@
 }
 
 .sprite-box {
-  width: 100%;
+  width: 100px;
+  margin-left: 6px;
+  margin-top: 7px;
   aspect-ratio: 1;
   background-color: var(--gb-green-crystal);
-  border: 4px solid var(--gb-white);
-  box-shadow: inset 0 0 0 2px var(--gb-black);
+  border: 4px solid var(--gb-green-crystal);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 6px;
+  position: relative;
+  box-shadow: 0 0 0 2px var(--gb-black), 0 0 0 4px var(--gb-white);
 }
 
 .monochrome-sprite {
-  width: 90%;
-  height: 90%;
+  width: 56px;
+  height: 56px;
+  scale: 1.65;
+  object-fit: none;
+  object-position: center;
+  transform: translate(-2px, -6px);
   image-rendering: pixelated; /* Mantiene bordes duros 8-bit */
 }
 
+.sprite-overlay {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background-color: #4b9902;
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
 .counters-box {
+  width: 100px;
+  margin-left: 6px;
   background-color: var(--gb-black);
-  border: 4px solid var(--gb-white);
-  padding: 6px;
+  border: 2px solid var(--gb-white);
+  padding: 8px;
   font-size: 10px;
   display: flex;
   flex-direction: column;
@@ -63,6 +84,8 @@
 /* Derecha (Lista) */
 .right-column-container {
   position: relative;
+  left: -10px;
+  top: 1px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -72,7 +95,8 @@
 
 .right-column-wrapper {
   background-color: var(--gb-black);
-  border: 4px solid var(--gb-white);
+  border: 2px solid var(--gb-white);
+  padding: 2px;
   display: flex;
   flex-direction: column;
   overflow: hidden;

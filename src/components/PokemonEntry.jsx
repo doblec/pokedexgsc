@@ -66,7 +66,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   };
 
   if (loading || !details) {
-    return <div className="loading-screen">LOADING...</div>;
+    return <div className="pokedex-entry-container"></div>;
   }
 
   // Conversión de unidades para mostrar estilo imperial (como en el juego US)
