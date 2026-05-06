@@ -1,124 +1,186 @@
 .pokedex-list-container {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-template-rows: 1fr 24px;
+  grid-template-columns: 124px 1fr;
+  grid-template-rows: 1fr;
+  gap: 6px;
+  padding: 6px;
   width: 100%;
   height: 100%;
-  background-color: var(--gb-black);
+  background-color: var(--gb-orange);
   color: var(--gb-white);
   font-size: 12px;
 }
 
 /* Izquierda */
 .left-column {
-  padding: 4px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .sprite-box {
   width: 100%;
   aspect-ratio: 1;
-  background-color: var(--gb-green-light);
-  border: 2px solid var(--gb-white);
+  background-color: var(--gb-green-crystal);
+  border: 4px solid var(--gb-white);
+  box-shadow: inset 0 0 0 2px var(--gb-black);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .monochrome-sprite {
-  width: 64px;
-  height: 64px;
-  filter: grayscale(100%) brightness(0.6) sepia(1) hue-rotate(70deg) saturate(3);
-  /* Truco para simular el tinte verde oscuro de GBC */
+  width: 90%;
+  height: 90%;
+  image-rendering: pixelated; /* Mantiene bordes duros 8-bit */
 }
 
 .counters-box {
   background-color: var(--gb-black);
-  border: 2px solid var(--gb-white);
-  padding: 4px;
+  border: 4px solid var(--gb-white);
+  padding: 6px;
   font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.counter-row {
+.counter-block {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.counter-label {
+  text-align: left;
+  margin-bottom: 2px;
+}
+
+.counter-value {
+  text-align: right;
 }
 
 /* Derecha (Lista) */
+.right-column-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.right-column-wrapper {
+  background-color: var(--gb-black);
+  border: 4px solid var(--gb-white);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.scroll-indicator-top,
+.scroll-indicator-bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gb-white);
+  font-size: 8px;
+  z-index: 2;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.scroll-indicator-top { top: -20px; }
+.scroll-indicator-bottom { bottom: -20px; }
+
+.scroll-arrow {
+  display: block;
+  image-rendering: pixelated;
+  scale: 0.20;
+}
+
+.scroll-arrow.flip-y {
+  transform: scaleY(-1);
+}
+
 .right-column {
   overflow-y: auto;
-  padding-left: 8px;
+  padding-left: 0px;
   padding-right: 4px;
+  height: 100%;
 }
 
 .list-item {
-  margin-bottom: 4px;
-  padding: 2px;
-  border: 2px solid transparent; /* Espacio reservado para el cursor */
+  margin-bottom: 2px;
+  padding: 6px 6px 2px 0px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
 }
 
 .item-number {
-  padding-left: 20px;
+  padding-left: 8px;
+  font-size: 14px;
 }
 
 .item-name-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  padding: 2px 4px 2px 8px;
+  width: 100%;
 }
 
-/* Cursor de Selección Estilo GSC */
+.pokeball-icon-img, .pokeball-icon-placeholder {
+  width: 12px;
+  height: 12px;
+  image-rendering: pixelated;
+}
+
+/* Cursor de Selección Estilo Crystal */
 .list-item.selected {
-  border: 2px solid #f8d050; /* Verde/Amarillo brillante */
   background-color: transparent;
-  position: relative;
-  animation: blink-border 1s infinite;
 }
 
-.list-item.selected::before {
-  content: '';
+.selector-corner {
   position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #f8d050;
+  image-rendering: pixelated;
+  scale: 0.25;
 }
 
-.list-item.selected::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #f8d050;
+/* Esquina superior izquierda (Espejo Vertical) */
+.selector-corner.top-left {
+  top: -60px;
+  left: 0px;
+  transform: scaleY(-1);
+  transform-origin: bottom left;
 }
 
-@keyframes blink-border {
-  0%, 100% { border-color: #f8d050; }
-  50% { border-color: #a08020; }
+/* Esquina superior derecha (Espejo Total: La diametralmente contraria) */
+.selector-corner.top-right {
+  top: -60px;
+  left: 103%;
+  transform: scale(-1, -1);
+  transform-origin: bottom left;
 }
 
-/* Barra Inferior */
-.bottom-bar {
-  grid-column: 1 / -1;
-  background-color: var(--gb-red-ui);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 8px;
+/* Esquina base original (La que sabemos que funciona) */
+.selector-corner.bottom-left {
+  bottom: -2px;
+  left: 0px;
+  transform: rotate(0deg);
+  transform-origin: bottom left;
 }
 
-.pill-button {
-  background: black;
-  color: white;
-  border-radius: 10px;
-  padding: 2px 8px;
-  font-size: 8px;
+/* Esquina inferior derecha (Espejo Horizontal) */
+.selector-corner.bottom-right {
+  bottom: -2px;
+  left: 103%;
+  transform: scaleX(-1);
+  transform-origin: bottom left;
 }

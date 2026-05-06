@@ -5,7 +5,7 @@ import { usePokemonList } from './hooks/usePokemon';
 import './App.css'
 
 function App() {
-  const [view, setView] = useState('ENTRY'); // 'LIST' | 'ENTRY'
+  const [view, setView] = useState('LIST'); // 'LIST' | 'ENTRY'
   const [selectedId, setSelectedId] = useState(1);
   const { pokemonList, loading } = usePokemonList();
 

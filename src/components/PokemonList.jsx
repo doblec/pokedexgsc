@@ -1,4 +1,7 @@
 import { useEffect, useRef } from 'react';
+import pokeballSprite from '../assets/sprites/pokeball.png';
+import selectorSprite from '../assets/sprites/selector.png';
+import arrowSprite from '../assets/sprites/arrow.png';
 import './PokemonList.css';
 
 export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
@@ -47,32 +50,54 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
           )}
         </div>
         <div className="counters-box">
-          <div className="counter-row"><span>SEEN</span><span>251</span></div>
-          <div className="counter-row"><span>OWN</span><span>251</span></div>
+          <div className="counter-block">
+            <span className="counter-label">SEEN</span>
+            <span className="counter-value">251</span>
+          </div>
+          <div className="counter-block">
+            <span className="counter-label">OWN</span>
+            <span className="counter-value">251</span>
+          </div>
         </div>
       </div>
 
       {/* Columna Derecha */}
-      <div className="right-column" ref={listRef}>
-        {list.map((pokemon) => (
-          <div 
-            key={pokemon.id} 
-            className={`list-item ${pokemon.id === selectedId ? 'selected' : ''}`}
-            onClick={() => { onSelect(pokemon.id); onConfirm(pokemon.id); }}
-          >
-            <div className="item-number">{String(pokemon.id).padStart(3, '0')}</div>
-            <div className="item-name-row">
-              <span className="pokeball-icon">{pokemon.caught ? '●' : ' '}</span>
-              <span className="name">{pokemon.name.toUpperCase()}</span>
+      <div className="right-column-container">
+        <div className="scroll-indicator-top">
+          <img src={arrowSprite} className="scroll-arrow" alt="up" />
+        </div>
+        <div className="right-column-wrapper">
+        <div className="right-column" ref={listRef}>
+          {list.map((pokemon) => (
+            <div 
+              key={pokemon.id} 
+              className={`list-item ${pokemon.id === selectedId ? 'selected' : ''}`}
+              onClick={() => { onSelect(pokemon.id); onConfirm(pokemon.id); }}
+            >
+              {pokemon.id === selectedId && (
+                <>
+                  <img src={selectorSprite} className="selector-corner top-left" alt="" />
+                  <img src={selectorSprite} className="selector-corner top-right" alt="" />
+                  <img src={selectorSprite} className="selector-corner bottom-left" alt="" />
+                  <img src={selectorSprite} className="selector-corner bottom-right" alt="" />
+                </>
+              )}
+              <div className="item-number">{String(pokemon.id).padStart(3, '0')}</div>
+              <div className="item-name-row">
+                {pokemon.caught ? (
+                  <img src={pokeballSprite} alt="caught" className="pokeball-icon-img" />
+                ) : (
+                  <div className="pokeball-icon-placeholder"></div>
+                )}
+                <span className="name">{pokemon.name.toUpperCase()}</span>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Barra Inferior */}
-      <div className="bottom-bar">
-        <div className="pill-button">SELECT ▶ OPTION</div>
-        <div className="pill-button">START ▶ SEARCH</div>
+          ))}
+        </div>
+        </div>
+        <div className="scroll-indicator-bottom">
+          <img src={arrowSprite} className="scroll-arrow flip-y" alt="down" />
+        </div>
       </div>
     </div>
   );

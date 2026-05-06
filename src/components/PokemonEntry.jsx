@@ -20,7 +20,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     const handleKeyDown = (e) => {
       const key = e.key.toLowerCase();
       if (key === 'x') { 
-        //onBack();
+        onBack();
       } else if (key === 'arrowleft') {
         setMenuSelection(prev => {
           if (prev === -1) return 0;

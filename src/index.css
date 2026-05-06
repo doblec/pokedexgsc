@@ -10,6 +10,9 @@
   --gb-white: #f8f8f8;
   --gb-green-light: #d0f8d0; /* Fondo sprite lista */
   --gb-green-dark: #306850;  /* Tinte sprite lista */
+  --gb-green-crystal: #78C828; /* Verde lima vibrante sprite */
+  --gb-green-select: #48b820;  /* Verde cursor lista */
+  --gb-orange: #df653f;      /* Naranja/terracota interfaz principal */
   --gb-red-ui: #d85030;      /* Barra inferior lista */
   --gb-red-border: #a04040;  /* Borde detalle */
   --gb-cursor: #f8a050;      /* Color cursor */
