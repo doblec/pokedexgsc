@@ -65,7 +65,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     setIsShiny(prev => !prev);
   };
 
-  if (loading || !details) {
+  if (!details) {
     return <div className="pokedex-entry-container"></div>;
   }
 
