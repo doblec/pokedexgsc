@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import pokeballSprite from '../assets/sprites/pokeball.png';
 import selectorSprite from '../assets/sprites/selector.png';
 import arrowSprite from '../assets/sprites/arrow.png';
@@ -6,6 +6,37 @@ import './PokemonList.css';
 
 export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
   const listRef = useRef(null);
+  const [spriteSrc, setSpriteSrc] = useState(null);
+  const [isSpriteLoading, setIsSpriteLoading] = useState(true);
+
+  // Convert GIF to PNG for the first frame to get accurate cropping
+  useEffect(() => {
+    if (!selectedId) return;
+
+    setIsSpriteLoading(true);
+    const form = selectedId === 201 ? '-a' : '';
+    const gifUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/animated/${selectedId}${form}.gif`;
+
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // Required for canvas operations on external images
+    img.src = gifUrl;
+
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0); // Draws the first frame of the GIF
+      setSpriteSrc(canvas.toDataURL('image/png'));
+      setIsSpriteLoading(false);
+    };
+    
+    img.onerror = () => {
+      console.error("Failed to load GIF for conversion:", gifUrl);
+      setIsSpriteLoading(false);
+      setSpriteSrc(null);
+    };
+  }, [selectedId]);
 
   // Auto-scroll to keep selection visible
   useEffect(() => {
@@ -64,10 +95,10 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
       {/* Left Column */}
       <div className="left-column">
         <div className="sprite-box">
-          {currentPokemon && (
+          {currentPokemon && !isSpriteLoading && spriteSrc && (
             <img 
               key={selectedId}
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/transparent/${selectedId}.png`}
+              src={spriteSrc}
               alt="preview"
               className="monochrome-sprite"
             />

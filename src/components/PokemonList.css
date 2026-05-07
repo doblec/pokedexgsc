@@ -41,7 +41,7 @@
   scale: 1.65;
   object-fit: none;
   object-position: center;
-  transform: translate(-2px, -6px);
+  transform: translate(-2px, -8px);
   image-rendering: pixelated; /* Keep hard 8-bit edges */
 }
 
@@ -150,8 +150,7 @@
 }
 
 .list-item {
-  margin-bottom: 2px;
-  padding: 6px 6px 2px 0px;
+  padding: 5px 6px 2px 0px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -207,7 +206,7 @@
 
 /* Bottom left corner (Base original) */
 .selector-corner.bottom-left {
-  bottom: -2px;
+  bottom: -3px;
   left: 0px;
   transform: rotate(0deg);
   transform-origin: bottom left;
@@ -215,7 +214,7 @@
 
 /* Bottom right corner (Horizontal mirror) */
 .selector-corner.bottom-right {
-  bottom: -2px;
+  bottom: -3px;
   left: calc(100% + 4px);
   transform: scaleX(-1);
   transform-origin: bottom left;

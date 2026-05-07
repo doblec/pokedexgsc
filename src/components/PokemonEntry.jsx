@@ -7,7 +7,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   const { details, loading } = usePokemonDetails(id);
   const [pageIndex, setPageIndex] = useState(2); // 0: Gold, 1: Silver, 2: Crystal
   const [isShiny, setIsShiny] = useState(false);
-  const [menuSelection, setMenuSelection] = useState(-1); // -1: None, 0: PAGE, 1: AREA, 2: CRY, 3: SHINY
+  const [menuSelection, setMenuSelection] = useState(0); // -1: None, 0: GAME, 1: AREA, 2: CRY, 3: SHINY
 
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
@@ -24,7 +24,6 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         onBack();
       } else if (key === 'arrowleft') {
         setMenuSelection(prev => {
-          if (prev === -1) return 0;
           if (prev === 0) return 3;
           if (prev === 2) return 0; // Skip AREA (1)
           if (prev === 3) return 2;
@@ -32,7 +31,6 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         });
       } else if (key === 'arrowright') {
         setMenuSelection(prev => {
-          if (prev === -1) return 0;
           if (prev === 0) return 2; // Skip AREA (1)
           if (prev === 2) return 3;
           if (prev === 3) return 0;
