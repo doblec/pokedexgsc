@@ -195,7 +195,7 @@
   transform: translateY(-50%);
   height: 8px; /* Maintain aspect ratio for pixel art */
   image-rendering: pixelated;
-  animation: retro-blink 1s infinite;
+  animation: retro-blink 0.6s infinite;
 }
 
 @keyframes retro-blink {
@@ -208,6 +208,7 @@
   cursor: pointer;
 }
 
+
 .clickable:active {
-  color: #f8d050;
+  /*color: #f8d050;*/
 }

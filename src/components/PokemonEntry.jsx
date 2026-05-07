@@ -25,12 +25,18 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
       } else if (key === 'arrowleft') {
         setMenuSelection(prev => {
           if (prev === -1) return 0;
-          return prev > 0 ? prev - 1 : 3;
+          if (prev === 0) return 3;
+          if (prev === 2) return 0; // Skip AREA (1)
+          if (prev === 3) return 2;
+          return 0;
         });
       } else if (key === 'arrowright') {
         setMenuSelection(prev => {
           if (prev === -1) return 0;
-          return prev < 3 ? prev + 1 : 0;
+          if (prev === 0) return 2; // Skip AREA (1)
+          if (prev === 2) return 3;
+          if (prev === 3) return 0;
+          return 0;
         });
       } else if (key === 'arrowup') {
         e.preventDefault();
@@ -129,16 +135,18 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
             onClick={() => { setMenuSelection(0); handlePageChange(); }}
           >
             {menuSelection === 0 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
-            <span>PAGE</span>
+            <span>GAME</span>
           </div>
           
-          <div 
-            className="menu-item-wrapper clickable" 
-            onClick={() => setMenuSelection(1)}
-          >
-            {menuSelection === 1 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
-            <span>AREA</span>
-          </div>
+          {/* 
+            <div 
+              className="menu-item-wrapper clickable" 
+              onClick={() => setMenuSelection(1)}
+            >
+              {menuSelection === 1 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+              <span>AREA</span>
+            </div>
+          */}
           
           <div 
             className="menu-item-wrapper clickable" 
