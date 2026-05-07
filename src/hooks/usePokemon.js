@@ -9,11 +9,11 @@ export function usePokemonList() {
   useEffect(() => {
     const fetchList = async () => {
       try {
-        // Obtenemos los primeros 251 (Gen 1 y 2)
+        // Fetch first 251 pokemon (Gen 1 & 2)
         const response = await fetch(`${POKEAPI_BASE}/pokemon?limit=251`);
         const data = await response.json();
         
-        // Mapeamos para tener ID y Nombre limpio
+        // Map data for clean ID and Name
         const formattedList = data.results.map((p, index) => ({
           id: index + 1,
           name: p.name,
@@ -47,7 +47,7 @@ export function usePokemonDetails(id) {
     const fetchDetails = async () => {
       setLoading(true);
       try {
-        // Fetch paralelo de datos básicos y especies
+        // Parallel fetch for basic data and species
         const [pokemonRes, speciesRes] = await Promise.all([
           fetch(`${POKEAPI_BASE}/pokemon/${id}`),
           fetch(`${POKEAPI_BASE}/pokemon-species/${id}`)
@@ -74,8 +74,8 @@ export function usePokemonDetails(id) {
         setDetails({
           id: pokemon.id,
           name: pokemon.name,
-          height: pokemon.height, // Decímetros
-          weight: pokemon.weight, // Hectogramos
+          height: pokemon.height, // Decimeters
+          weight: pokemon.weight, // Hectograms
           sprites: {
             normal: [
              `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/gold/${id}${form}.png`,

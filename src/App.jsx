@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Contenedor físico de la pantalla (Estética) */}
+      {/* Physical screen container */}
       <div className="gameboy-screen">
         <div className="screen-content">
           {view === 'LIST' && (

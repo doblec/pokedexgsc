@@ -7,17 +7,22 @@ import './PokemonList.css';
 export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
   const listRef = useRef(null);
 
-  // Auto-scroll para mantener la selección visible
+  // Auto-scroll to keep selection visible
   useEffect(() => {
     if (listRef.current) {
-      const selectedElement = listRef.current.querySelector('.selected');
+      const container = listRef.current;
+      const selectedElement = container.querySelector('.selected');
       if (selectedElement) {
-        selectedElement.scrollIntoView({ block: 'center', behavior: 'auto' });
+        // Calculate scroll manually to prevent shifting parent containers
+        const elementTop = selectedElement.offsetTop;
+        const elementHeight = selectedElement.offsetHeight;
+        const containerHeight = container.clientHeight;
+        container.scrollTop = elementTop - (containerHeight / 2) + (elementHeight / 2);
       }
     }
   }, [selectedId]);
 
-  // Manejo de teclado
+  // Keyboard handling
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowDown') {
@@ -26,6 +31,12 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         onSelect(prev => (prev > 1 ? prev - 1 : prev));
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        onSelect(prev => Math.min(prev + 10, list.length));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        onSelect(prev => Math.max(prev - 10, 1));
       } else if (e.key.toLowerCase() === 'z') {
         onConfirm(selectedId);
       }
@@ -36,13 +47,26 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
 
   const currentPokemon = list.find(p => p.id === selectedId);
 
+  // Handle mouse pagination
+  const handleContextMenu = (e) => {
+    e.preventDefault(); // Evita que se abra el menú nativo del navegador
+    onSelect(prev => Math.min(prev + 10, list.length));
+  };
+
+  const handleListLeftClick = (e) => {
+    // Ignore if clicking a pokemon item (let the item's onClick handle it)
+    if (e.target.closest('.list-item')) return;
+    onSelect(prev => Math.max(prev - 10, 1));
+  };
+
   return (
     <div className="pokedex-list-container">
-      {/* Columna Izquierda */}
+      {/* Left Column */}
       <div className="left-column">
         <div className="sprite-box">
           {currentPokemon && (
             <img 
+              key={selectedId}
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/crystal/transparent/${selectedId}.png`}
               alt="preview"
               className="monochrome-sprite"
@@ -62,8 +86,12 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
         </div>
       </div>
 
-      {/* Columna Derecha */}
-      <div className="right-column-container">
+      {/* Right Column */}
+      <div 
+        className="right-column-container"
+        onContextMenu={handleContextMenu}
+        onClick={handleListLeftClick}
+      >
         <div className="scroll-indicator-top">
           <img src={arrowSprite} className="scroll-arrow" alt="up" />
         </div>

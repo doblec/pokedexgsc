@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { usePokemonDetails } from '../hooks/usePokemon';
+import whiterowSprite from '../assets/sprites/whiterow.png';
 import './PokemonEntry.css';
 
 export default function PokemonEntry({ id, onBack, onIdChange }) {
@@ -10,12 +11,12 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
 
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
-    // Mantener estado al cambiar de entry
+    // Keep state when switching entries
     // setPageIndex(2);
     // setIsShiny(false);
   }, [id]);
 
-  // Manejo de teclado para navegación y acciones
+  // Keyboard handling for navigation and actions
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key.toLowerCase();
@@ -45,9 +46,9 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onBack, menuSelection, pageIndex, isShiny, details, onIdChange]); // Dependencias necesarias para las acciones
+  }, [onBack, menuSelection, pageIndex, isShiny, details, onIdChange]); // Required dependencies for actions
 
-  // Función para reproducir el grito
+  // Play pokemon cry
   const playCry = () => {
     if (details?.cry) {
       const audio = new Audio(details.cry);
@@ -69,7 +70,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     return <div className="pokedex-entry-container"></div>;
   }
 
-  // Conversión de unidades para mostrar estilo imperial (como en el juego US)
+  // Convert units to imperial (US game style)
   const feet = Math.floor((details.height * 3.937) / 12);
   const inches = Math.round(((details.height * 3.937) % 12));
   const lbs = (details.weight * 0.220462).toFixed(1);
@@ -82,7 +83,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
 
   return (
     <div className="pokedex-entry-container">
-      {/* Mitad Superior */}
+      {/* Top Half */}
       <div className="top-half">
         <div className="entry-left">
           <div className="entry-sprite-box">
@@ -110,38 +111,50 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         </div>
       </div>
 
-      {/* Separador Central */}
+      {/* Center Separator */}
       <div className="separator-line">
        <div className="page-tab">{pageVersions[pageIndex]}</div>
       </div>
 
-      {/* Mitad Inferior (Descripción) */}
+      {/* Bottom Half (Description) */}
       <div className="bottom-half">
         <p className="flavor-text">{details.descriptions && details.descriptions[pageIndex]}</p>
       </div>
 
-      {/* Menú Inferior */}
+      {/* Bottom Menu */}
       <div className="entry-menu">
         <div className="menu-pill">
-          <span 
-            className={`clickable ${menuSelection === 0 ? 'selected' : ''}`} 
+          <div 
+            className="menu-item-wrapper clickable" 
             onClick={() => { setMenuSelection(0); handlePageChange(); }}
-          >PAGE</span>
+          >
+            {menuSelection === 0 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>PAGE</span>
+          </div>
           
-          <span 
-            className={menuSelection === 1 ? 'selected' : ''} 
+          <div 
+            className="menu-item-wrapper clickable" 
             onClick={() => setMenuSelection(1)}
-          >AREA</span>
+          >
+            {menuSelection === 1 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>AREA</span>
+          </div>
           
-          <span 
-            className={`clickable ${menuSelection === 2 ? 'selected' : ''}`} 
+          <div 
+            className="menu-item-wrapper clickable" 
             onClick={() => { setMenuSelection(2); playCry(); }}
-          >CRY</span>
+          >
+            {menuSelection === 2 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>CRY</span>
+          </div>
           
-          <span 
-            className={`clickable ${menuSelection === 3 ? 'selected' : ''}`} 
+          <div 
+            className="menu-item-wrapper clickable" 
             onClick={() => { setMenuSelection(3); toggleShiny(); }}
-          >SHINY</span>
+          >
+            {menuSelection === 3 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>SHINY</span>
+          </div>
         </div>
       </div>
     </div>
