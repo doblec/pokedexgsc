@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PokemonList from './components/PokemonList';
 import PokemonEntry from './components/PokemonEntry';
 import { usePokemonList } from './hooks/usePokemon';
+import Background from './components/Background';
 import './App.css'
 
 function App() {
@@ -20,6 +21,15 @@ function App() {
 
   return (
     <div className="app-container">
+      <Background 
+        scale={1.35} 
+        hue={0} 
+        offsetX={0} 
+        offsetY={450} 
+        lightX={83} 
+        lightY={263} 
+      />
+
       {/* Physical screen container */}
       <div className="gameboy-screen">
         <div className="screen-content">

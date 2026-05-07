@@ -36,7 +36,7 @@
 .entry-sprite-box {
   width: 100px;
   aspect-ratio: 1;
-  background-color: white;
+  background-color: var(--gb-white);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -194,6 +194,7 @@
   top: 50%;
   transform: translateY(-50%);
   height: 8px; /* Maintain aspect ratio for pixel art */
+  height: 8px;
   image-rendering: pixelated;
   animation: retro-blink 0.6s infinite;
 }

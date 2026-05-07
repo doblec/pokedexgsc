@@ -8,14 +8,15 @@
 :root {
   --gb-black: #000000;
   --gb-white: #f8f8f8;
-  --gb-green-light: #d0f8d0; /* Fondo sprite lista */
-  --gb-green-dark: #306850;  /* Tinte sprite lista */
-  --gb-green-crystal: #78C828; /* Verde lima vibrante sprite */
-  --gb-green-select: #48b820;  /* Verde cursor lista */
-  --gb-orange: #df653f;      /* Naranja/terracota interfaz principal */
-  --gb-red-ui: #d85030;      /* Barra inferior lista */
-  --gb-red-border: #a04040;  /* Borde detalle */
-  --gb-cursor: #f8a050;      /* Color cursor */
+  --gb-green-crystal: #78C828; /* Vibrant lime green sprite */
+  --gb-green-overlay: #258409; /* Sprite overlay blend */
+  --gb-orange: #df653f;      /* Main UI orange/terracotta */
+  --gb-red-border: #a04040;  /* Detail border */
+  --bg-body: #202020;        /* Body background */
+  --gb-screen-border: #404040; /* Gameboy screen border */
+  --text-muted: #888888;       /* Instructions text */
+  --gb-light-core: #ff3333;  /* Power light center */
+  --gb-light-glow: #ff0000;  /* Power light shadow */
   --font-main: 'PokemonGB', 'Press Start 2P', monospace;
 }
 
@@ -25,7 +26,7 @@
 
 body {
   margin: 0;
-  background-color: #202020;
+  background-color: var(--bg-body);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,14 +34,15 @@ body {
   font-family: var(--font-main);
   -webkit-font-smoothing: none;
   image-rendering: pixelated;
+  overflow: hidden;
 }
 
-/* Utilidades de texto */
+/* Text utilities */
 .text-uppercase { text-transform: uppercase; }
 .text-white { color: var(--gb-white); }
 .text-black { color: var(--gb-black); }
 
-/* Scrollbar oculta para mantener estética */
+/* Hidden scrollbar to maintain aesthetics */
 ::-webkit-scrollbar {
   display: none;
 }

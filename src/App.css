@@ -3,13 +3,14 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  position: relative; /* Allows absolute positioning of the background */
 }
 
 .gameboy-screen {
-  width: 320px; /* Resolución escalada de GBC (160px original x 2) */
+  width: 320px; /* Scaled GBC resolution (160px original x 2) */
   height: 288px; /* 144px original x 2 */
-  background-color: #000;
-  border: 10px solid #404040;
+  background-color: var(--gb-black);
+  border: 10px solid var(--gb-screen-border);
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   overflow: hidden;
@@ -24,14 +25,14 @@
 }
 
 .loading-text {
-  color: white;
+  color: var(--gb-white);
   text-align: center;
   margin-top: 100px;
   font-family: var(--font-main);
 }
 
 .instructions {
-  color: #888;
+  color: var(--text-muted);
   font-family: sans-serif;
   text-align: center;
   font-size: 0.8rem;

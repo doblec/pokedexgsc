@@ -1,0 +1,27 @@
+.gb-background {
+  position: absolute;
+  top: 288px;
+  left: 50%;
+  z-index: -1;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gb-background-image {
+  image-rendering: pixelated;
+  display: block;
+}
+
+.gb-power-light {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  background-color: var(--gb-light-core);
+  border-radius: 100%;
+  box-shadow: 0 0 5px var(--gb-light-glow), 
+              0 0 10px var(--gb-light-glow), 
+              0 0 15px var(--gb-light-glow);
+  transform: translate(-50%, -50%);
+}

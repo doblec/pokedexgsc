@@ -80,7 +80,7 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
 
   // Handle mouse pagination
   const handleContextMenu = (e) => {
-    e.preventDefault(); // Evita que se abra el menú nativo del navegador
+    e.preventDefault(); // Prevent native browser menu from opening
     onSelect(prev => Math.min(prev + 10, list.length));
   };
 
