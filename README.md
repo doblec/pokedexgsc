@@ -60,7 +60,7 @@ This project is built using **React (Vite)** and pure **CSS3** (no external UI l
 
 ## 📁 Folder Structure
 
-- `/src/components/` - React UI components (`PokemonList`, `PokemonEntry`, `Background`, `SocialButton`).
+- `/src/components/` - React UI components (`PokemonList`, `PokemonEntry`, `Background`).
 - `/src/hooks/` - Custom data fetching hooks (`usePokemon.js`) handling PokeAPI requests and data mapping.
 - `/src/assets/` - Local sprites, fonts, and the Game Boy background overlay.
 - `/public/` - Favicons and PWA `site.webmanifest`.
