@@ -162,8 +162,9 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   }
 
   // Convert units to imperial (US game style)
-  const feet = Math.floor((details.height * 3.937) / 12);
-  const inches = Math.round(((details.height * 3.937) % 12));
+  const totalInches = Math.round(details.height * 3.937);
+  const feet = Math.floor(totalInches / 12);
+  const inches = totalInches % 12;
   const lbs = (details.weight * 0.220462).toFixed(1);
 
   const pageVersions = ['GOLD', 'SILVER', 'CRYSTAL'];

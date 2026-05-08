@@ -144,7 +144,7 @@
 .right-column {
   overflow-y: auto;
   padding-left: 0px;
-  padding-right: 4px;
+  padding-right: 3.75px;
   height: 100%;
   position: relative;
 }
