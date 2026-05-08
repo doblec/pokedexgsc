@@ -99,8 +99,8 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     text.style.fontSize = '11px';
 
     let fontSize = 11;
-    while (container.scrollHeight > container.clientHeight && fontSize > 8.9) {
-      fontSize -= 0.25;
+    while (container.scrollHeight > container.clientHeight && fontSize > 9.9) {
+      fontSize -= 0.15;
       text.style.fontSize = `${fontSize}px`;
     }
   }, [details?.descriptions, pageIndex]);
