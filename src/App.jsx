@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PokemonList from './components/PokemonList';
 import PokemonEntry from './components/PokemonEntry';
 import { usePokemonList } from './hooks/usePokemon';
@@ -9,7 +9,20 @@ import './App.css'
 function App() {
   const [view, setView] = useState('LIST'); // 'LIST' | 'ENTRY'
   const [selectedId, setSelectedId] = useState(1);
+  const [appScale, setAppScale] = useState(1);
   const { pokemonList, loading } = usePokemonList();
+
+  // JS-based scaling for 100% cross-browser compatibility (fixes Firefox calc issue)
+  useEffect(() => {
+    const handleResize = () => {
+      const scaleX = window.innerWidth / 700;
+      const scaleY = window.innerHeight / 850;
+      setAppScale(Math.min(1, scaleX, scaleY));
+    };
+    handleResize(); // Initial calculation
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const playClickSound = () => {
     const audio = new Audio(clickSfx);
@@ -29,7 +42,7 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ '--app-scale': appScale }}>
       <div className="layout-scaler">
         <Background 
           scale={1.35} 

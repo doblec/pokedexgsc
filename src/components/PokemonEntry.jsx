@@ -201,7 +201,12 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         
         <div className="entry-right">
           <div className="entry-name">{details.name.toUpperCase()}</div>
-          <div className="entry-category">{details.category.toUpperCase()}</div>
+          <div 
+            className="entry-category"
+            style={details.category.length > 11 ? { fontSize: `${154 / details.category.length}px` } : {}}
+          >
+            {details.category.toUpperCase()}
+          </div>
           <div className="entry-stats">
             <div className="stat-row">
               <span className="label">HT</span>
