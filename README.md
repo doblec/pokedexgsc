@@ -7,10 +7,11 @@ A wannabe pixel-perfect, web-based Pokédex replicating the authentic Game Boy C
 - **Authentic Retro UI:** Replica of the Gen II Pokédex, including custom fonts, dual-border shadows, and a Game Boy Color overlay.
 - **Complete Gen 1 & 2 Roster:** Browse the first 251 Pokémon, complete with their Gold, Silver, and Crystal Pokédex texts and sprites.
 - **Animated & Shiny Sprites:** View both normal and shiny variants, including accurate animated sprites for the Crystal version.
-- **Audio Cries:** Listen to the 8-bit cries of every Pokémon.
+- **Audio Effects:** Listen to the 8-bit cries of every Pokémon, alongside retro UI click sounds.
 - **Keyboard & Mouse Support:** Fully navigable using traditional emulator keybinds or modern mouse interactions.
 - **Responsive Design:** Scales perfectly to any screen size (desktop or mobile) using dynamic CSS scaling without losing its pixel-art crispness.
 - **PWA Ready:** Includes manifest and icons to be installed as a standalone app on mobile devices.
+- **Auto-Deployment:** CI/CD pipeline configured with GitHub Actions for automatic deployment to GitHub Pages.
 
 ## 🎮 Controls
 
@@ -64,6 +65,7 @@ This project is built using **React (Vite)** and pure **CSS3** (no external UI l
 - `/src/hooks/` - Custom data fetching hooks (`usePokemon.js`) handling PokeAPI requests and data mapping.
 - `/src/assets/` - Local sprites, fonts, and the Game Boy background overlay.
 - `/public/` - Favicons and PWA `site.webmanifest`.
+- `/.github/workflows/` - GitHub Actions CI/CD deployment configuration.
 
 ## 📜 Credits
 
