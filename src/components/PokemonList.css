@@ -41,7 +41,7 @@
   scale: 1.65;
   object-fit: none;
   object-position: center;
-  transform: translate(-2px, -8px);
+  transform: translate(-2px, -7.5px);
   image-rendering: pixelated; /* Keep hard 8-bit edges */
 }
 

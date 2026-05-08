@@ -111,7 +111,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     // Reset to base size
     text.style.fontSize = '11px';
 
-    let fontSize = 11;
+    let fontSize = 12;
     while (container.scrollHeight > container.clientHeight && fontSize > 9.9) {
       fontSize -= 0.15;
       text.style.fontSize = `${fontSize}px`;

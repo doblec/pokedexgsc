@@ -104,7 +104,7 @@ export function usePokemonDetails(id) {
             findEntryText('crystal')
           ],
           category: category ? category.genus.replace(' Pokémon', '') : "Unknown",
-          cry: pokemon.cries?.latest || pokemon.cries?.legacy
+          cry: pokemon.cries?.legacy || pokemon.cries?.latest
         });
 
       } catch (error) {
