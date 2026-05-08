@@ -12,6 +12,10 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   const descriptionContainerRef = useRef(null);
   const flavorTextRef = useRef(null);
 
+  // References to calculate touch swipe
+  const touchStartY = useRef(null);
+  const touchEndY = useRef(null);
+
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
     // Keep state when switching entries
@@ -114,6 +118,28 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     }
   }, [details?.descriptions, pageIndex]);
 
+  // Touch event handling for swiping up/down
+  const minSwipeDistance = 70;
+
+  const handleTouchStart = (e) => {
+    touchEndY.current = null; // Reset touch end to avoid false positives
+    touchStartY.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndY.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartY.current || !touchEndY.current) return;
+    const distance = touchStartY.current - touchEndY.current;
+    if (distance > minSwipeDistance) {
+      onIdChange(prevId => (prevId < 251 ? prevId + 1 : 1)); 
+    } else if (distance < -minSwipeDistance) {
+      onIdChange(prevId => (prevId > 1 ? prevId - 1 : 251)); 
+    }
+  };
+
   if (!details) {
     return <div className="pokedex-entry-container"></div>;
   }
@@ -130,7 +156,12 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     : null;
 
   return (
-    <div className="pokedex-entry-container">
+    <div 
+      className="pokedex-entry-container"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Top Half */}
       <div className="top-half">
         <div className="entry-left">
