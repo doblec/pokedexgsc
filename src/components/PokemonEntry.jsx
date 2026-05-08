@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePokemonDetails } from '../hooks/usePokemon';
 import whiterowSprite from '../assets/sprites/whiterow.png';
 import './PokemonEntry.css';
@@ -8,6 +8,8 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   const [pageIndex, setPageIndex] = useState(2); // 0: Gold, 1: Silver, 2: Crystal
   const [isShiny, setIsShiny] = useState(false);
   const [menuSelection, setMenuSelection] = useState(0); // -1: None, 0: GAME, 1: AREA, 2: CRY, 3: SHINY
+  const descriptionContainerRef = useRef(null);
+  const flavorTextRef = useRef(null);
 
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
@@ -86,6 +88,23 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     setIsShiny(prev => !prev);
   };
 
+  // Resize flavor text to fit container
+  useEffect(() => {
+    if (!descriptionContainerRef.current || !flavorTextRef.current) return;
+
+    const container = descriptionContainerRef.current;
+    const text = flavorTextRef.current;
+
+    // Reset to base size
+    text.style.fontSize = '11px';
+
+    let fontSize = 11;
+    while (container.scrollHeight > container.clientHeight && fontSize > 8.9) {
+      fontSize -= 0.25;
+      text.style.fontSize = `${fontSize}px`;
+    }
+  }, [details?.descriptions, pageIndex]);
+
   if (!details) {
     return <div className="pokedex-entry-container"></div>;
   }
@@ -137,8 +156,10 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
       </div>
 
       {/* Bottom Half (Description) */}
-      <div className="bottom-half">
-        <p className="flavor-text">{details.descriptions && details.descriptions[pageIndex]}</p>
+      <div className="bottom-half" ref={descriptionContainerRef}>
+        <p className="flavor-text" ref={flavorTextRef}>
+          {details.descriptions && details.descriptions[pageIndex]}
+        </p>
       </div>
 
       {/* Bottom Menu */}
