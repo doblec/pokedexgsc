@@ -24,16 +24,18 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         onBack();
       } else if (key === 'arrowleft') {
         setMenuSelection(prev => {
-          if (prev === 0) return 3;
+          if (prev === 0) return 4;
           if (prev === 2) return 0; // Skip AREA (1)
           if (prev === 3) return 2;
+          if (prev === 4) return 3;
           return 0;
         });
       } else if (key === 'arrowright') {
         setMenuSelection(prev => {
           if (prev === 0) return 2; // Skip AREA (1)
           if (prev === 2) return 3;
-          if (prev === 3) return 0;
+          if (prev === 3) return 4;
+          if (prev === 4) return 0;
           return 0;
         });
       } else if (key === 'arrowup') {
@@ -46,6 +48,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         if (menuSelection === 0) handlePageChange();
         if (menuSelection === 2) playCry();
         if (menuSelection === 3) toggleShiny();
+        if (menuSelection === 4) onBack();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -164,6 +167,15 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
           >
             {menuSelection === 3 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
             <span>SHINY</span>
+          </div>
+          
+          <div 
+            className="menu-item-wrapper clickable" 
+            onMouseEnter={() => setMenuSelection(4)}
+            onClick={() => { setMenuSelection(4); onBack(); }}
+          >
+            {menuSelection === 4 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>BACK</span>
           </div>
         </div>
       </div>

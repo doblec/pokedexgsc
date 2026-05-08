@@ -53,13 +53,6 @@ function App() {
           </div>
         </div>
       </div>
-
-      <div className="instructions">
-        <p>CONTROLS:</p>
-        <p>Z : Select</p>
-        <p>X : Back</p>
-        <p>⬆ / ⬇ / ⬅ / ➡ : Navigate</p>
-      </div>
     </div>
   )
 }
