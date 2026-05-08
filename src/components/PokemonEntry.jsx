@@ -25,16 +25,16 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
       } else if (key === 'arrowleft') {
         setMenuSelection(prev => {
           if (prev === 0) return 4;
-          if (prev === 2) return 0; // Skip AREA (1)
-          if (prev === 3) return 2;
-          if (prev === 4) return 3;
+          if (prev === 4) return 2;
+          if (prev === 2) return 3; 
+          if (prev === 3) return 0; // Skip AREA (1)
           return 0;
         });
       } else if (key === 'arrowright') {
         setMenuSelection(prev => {
-          if (prev === 0) return 2; // Skip AREA (1)
-          if (prev === 2) return 3;
-          if (prev === 3) return 4;
+          if (prev === 0) return 3; // Skip AREA (1)
+          if (prev === 3) return 2;
+          if (prev === 2) return 4;
           if (prev === 4) return 0;
           return 0;
         });
@@ -63,6 +63,19 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
       audio.play().catch(e => console.log("Audio play failed", e));
     }
   };
+
+  // Auto-play cry when details load
+  useEffect(() => {
+    if (details?.cry) {
+      const timeoutId = setTimeout(() => {
+        const audio = new Audio(details.cry);
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log("Audio play failed", e));
+      }, 250);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [details?.cry]);
 
   const handlePageChange = () => {
     // Cycle through the 3 descriptions (0, 1, 2)
@@ -153,20 +166,20 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
           
           <div 
             className="menu-item-wrapper clickable" 
-            onMouseEnter={() => setMenuSelection(2)}
-            onClick={() => { setMenuSelection(2); playCry(); }}
-          >
-            {menuSelection === 2 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
-            <span>CRY</span>
-          </div>
-          
-          <div 
-            className="menu-item-wrapper clickable" 
             onMouseEnter={() => setMenuSelection(3)}
             onClick={() => { setMenuSelection(3); toggleShiny(); }}
           >
             {menuSelection === 3 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
             <span>SHINY</span>
+          </div>
+          
+          <div 
+            className="menu-item-wrapper clickable" 
+            onMouseEnter={() => setMenuSelection(2)}
+            onClick={() => { setMenuSelection(2); playCry(); }}
+          >
+            {menuSelection === 2 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
+            <span>CRY</span>
           </div>
           
           <div 

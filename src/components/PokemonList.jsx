@@ -84,20 +84,6 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
 
   const currentPokemon = list.find(p => p.id === selectedId);
 
-  // Handle mouse pagination
-  const handleContextMenu = (e) => {
-    e.preventDefault(); // Prevent native browser menu from opening
-    blockScrollRef.current = false;
-    onSelect(prev => Math.min(prev + 10, list.length));
-  };
-
-  const handleListLeftClick = (e) => {
-    // Ignore if clicking a pokemon item (let the item's onClick handle it)
-    if (e.target.closest('.list-item')) return;
-    blockScrollRef.current = false;
-    onSelect(prev => Math.max(prev - 10, 1));
-  };
-
   return (
     <div className="pokedex-list-container">
       {/* Left Column */}
@@ -128,8 +114,6 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
       {/* Right Column */}
       <div 
         className="right-column-container"
-        onContextMenu={handleContextMenu}
-        onClick={handleListLeftClick}
       >
         <div className="scroll-indicator-top">
           <img src={arrowSprite} className="scroll-arrow" alt="up" />

@@ -3,6 +3,7 @@ import PokemonList from './components/PokemonList';
 import PokemonEntry from './components/PokemonEntry';
 import { usePokemonList } from './hooks/usePokemon';
 import Background from './components/Background';
+import clickSfx from './assets/sfx/click.mp3';
 import './App.css'
 
 function App() {
@@ -10,12 +11,20 @@ function App() {
   const [selectedId, setSelectedId] = useState(1);
   const { pokemonList, loading } = usePokemonList();
 
+  const playClickSound = () => {
+    const audio = new Audio(clickSfx);
+    audio.volume = 0.5;
+    audio.play().catch(e => console.log("Audio play failed", e));
+  };
+
   const handleSelectPokemon = (id) => {
+    playClickSound();
     setSelectedId(id);
     setView('ENTRY');
   };
 
   const handleBackToList = () => {
+    playClickSound();
     setView('LIST');
   };
 
