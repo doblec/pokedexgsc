@@ -132,6 +132,12 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
                   onSelect(pokemon.id);
                 }
               }}
+              onTouchStart={() => {
+                if (pokemon.id !== selectedId) {
+                  blockScrollRef.current = true;
+                  onSelect(pokemon.id);
+                }
+              }}
               onClick={() => { onSelect(pokemon.id); onConfirm(pokemon.id); }}
             >
               {pokemon.id === selectedId && (
