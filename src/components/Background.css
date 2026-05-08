@@ -10,8 +10,6 @@
 .gb-background-image {
   image-rendering: pixelated;
   display: block;
-  height: 100vh; /* Reserva de espacio estricta para evitar CLS */
-  width: auto;
 }
 
 .gb-power-light {

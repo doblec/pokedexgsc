@@ -21,34 +21,36 @@ function App() {
 
   return (
     <div className="app-container">
-      <Background 
-        scale={2.2} 
-        hue={0} 
-        offsetX={0} 
-        offsetY={450} 
-        lightX={51} 
-        lightY={162} 
-        radius={13}
-      />
+      <div className="layout-scaler">
+        <Background 
+          scale={1.35} 
+          hue={0} 
+          offsetX={0} 
+          offsetY={450} 
+          lightX={83} 
+          lightY={262} 
+          radius={15}
+        />
 
-      {/* Physical screen container */}
-      <div className="gameboy-screen">
-        <div className="screen-content">
-          {view === 'LIST' && (
-            <PokemonList
-              list={pokemonList}
-              selectedId={selectedId}
-              onSelect={setSelectedId}
-              onConfirm={handleSelectPokemon}
-            />
-          )}
-          {view === 'ENTRY' && (
-            <PokemonEntry
-              id={selectedId}
-              onBack={handleBackToList}
-              onIdChange={setSelectedId}
-            />
-          )}
+        {/* Physical screen container */}
+        <div className="gameboy-screen">
+          <div className="screen-content">
+            {view === 'LIST' && (
+              <PokemonList
+                list={pokemonList}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+                onConfirm={handleSelectPokemon}
+              />
+            )}
+            {view === 'ENTRY' && (
+              <PokemonEntry
+                id={selectedId}
+                onBack={handleBackToList}
+                onIdChange={setSelectedId}
+              />
+            )}
+          </div>
         </div>
       </div>
 

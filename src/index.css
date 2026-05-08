@@ -18,6 +18,7 @@
   --gb-light-core: #ff3333;  /* Power light center */
   --gb-light-glow: #ff0000;  /* Power light shadow */
   --font-main: 'PokemonGB', 'Press Start 2P', monospace;
+  --app-scale: min(1, calc(100vw / 700px), calc(100vh / 850px));
 }
 
 * {

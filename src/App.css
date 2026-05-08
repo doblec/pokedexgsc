@@ -8,6 +8,16 @@
   align-items: center;
 }
 
+.layout-scaler {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%) scale(var(--app-scale, 1));
+  pointer-events: none;
+}
+
 .gameboy-screen {
   width: 320px; /* Scaled GBC resolution (160px original x 2) */
   height: 288px; /* 144px original x 2 */
@@ -21,6 +31,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(2);
   z-index: 10;
+  pointer-events: auto;
 }
 
 .screen-content {
