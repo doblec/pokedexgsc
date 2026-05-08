@@ -16,8 +16,8 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   const touchStartY = useRef(null);
   const touchEndY = useRef(null);
 
-  // Reference to throttle wheel events
-  const lastWheelTime = useRef(0);
+  // Reference to throttle navigation events (wheel and keyboard)
+  const lastNavTime = useRef(0);
 
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
@@ -50,9 +50,15 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         });
       } else if (key === 'arrowup') {
         e.preventDefault();
+        const now = Date.now();
+        if (now - lastNavTime.current < 40) return;
+        lastNavTime.current = now;
         onIdChange(prevId => (prevId > 1 ? prevId - 1 : 251));
       } else if (key === 'arrowdown') {
         e.preventDefault();
+        const now = Date.now();
+        if (now - lastNavTime.current < 40) return;
+        lastNavTime.current = now;
         onIdChange(prevId => (prevId < 251 ? prevId + 1 : 1));
       } else if (key === 'z') {
         if (menuSelection === 0) handlePageChange();
@@ -146,14 +152,14 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   // Mouse wheel handling for navigation
   const handleWheel = (e) => {
     const now = Date.now();
-    if (now - lastWheelTime.current < 200) return; // 200ms cooldown to prevent skipping too many entries
+    if (now - lastNavTime.current < 40) return; // 40ms cooldown to prevent skipping too many entries
 
     if (e.deltaY > 0) {
       onIdChange(prevId => (prevId < 251 ? prevId + 1 : 1)); // Scroll down: Go forward (+1)
-      lastWheelTime.current = now;
+      lastNavTime.current = now;
     } else if (e.deltaY < 0) {
       onIdChange(prevId => (prevId > 1 ? prevId - 1 : 251)); // Scroll up: Go back (-1)
-      lastWheelTime.current = now;
+      lastNavTime.current = now;
     }
   };
 
