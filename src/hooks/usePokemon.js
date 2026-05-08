@@ -62,7 +62,17 @@ export function usePokemonDetails(id) {
           const entry = species.flavor_text_entries.find(
             e => e.language.name === 'en' && e.version.name === versionName
           );
-          return entry ? entry.flavor_text.replace(/[\f\n]/g, ' ') : "";
+          
+          if (!entry) return "";
+          
+          return entry.flavor_text
+            .replace(/\f/g, ' ')        // Replace form feeds with spaces
+            .replace(/\u00ad\n/g, '')   // Join words cut by a soft hyphen + line break
+            .replace(/\u00ad/g, '')     // Remove residual soft hyphens
+            .replace(/ -\n/g, ' - ')    // Protect hyphens used for dialogue or separation
+            .replace(/-\n/g, '-')       // Join words cut by normal hyphens at the end of the line
+            .replace(/\n/g, ' ')        // Replace the remaining line breaks with normal spaces
+            .replace(/\s+/g, ' ');      // Remove accidentally generated double spaces
         };
 
         const category = species.genera.find(g => g.language.name === 'en');
