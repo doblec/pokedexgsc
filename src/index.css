@@ -17,6 +17,12 @@
   --text-muted: #888888;       /* Instructions text */
   --gb-light-core: #ff3333;  /* Power light center */
   --gb-light-glow: #ff0000;  /* Power light shadow */
+  --gb-gold-border: #D8A838;     /* Classic flat gold */
+  --gb-gold-bg: #503810;         /* Retro gold shadow */
+  --gb-silver-border: #A8A8A8;   /* Classic flat silver */
+  --gb-silver-bg: #404040;       /* Retro silver shadow */
+  --gb-crystal-border: #58D0E0;  /* Classic crystal cyan */
+  --gb-crystal-bg: #204868;      /* Retro blue shadow */
   --font-main: 'PokemonGB', 'Press Start 2P', monospace;
   --app-scale: min(1, calc(100vw / 700px), calc(100vh / 850px));
 }

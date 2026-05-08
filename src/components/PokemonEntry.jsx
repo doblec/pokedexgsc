@@ -16,6 +16,9 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
   const touchStartY = useRef(null);
   const touchEndY = useRef(null);
 
+  // Reference to throttle wheel events
+  const lastWheelTime = useRef(0);
+
   // Reset page to Crystal when pokemon changes
   useEffect(() => {
     // Keep state when switching entries
@@ -109,7 +112,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     const text = flavorTextRef.current;
 
     // Reset to base size
-    text.style.fontSize = '11px';
+    text.style.fontSize = '12px';
 
     let fontSize = 12;
     while (container.scrollHeight > container.clientHeight && fontSize > 9.9) {
@@ -140,6 +143,20 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     }
   };
 
+  // Mouse wheel handling for navigation
+  const handleWheel = (e) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 200) return; // 200ms cooldown to prevent skipping too many entries
+
+    if (e.deltaY > 0) {
+      onIdChange(prevId => (prevId < 251 ? prevId + 1 : 1)); // Scroll down: Go forward (+1)
+      lastWheelTime.current = now;
+    } else if (e.deltaY < 0) {
+      onIdChange(prevId => (prevId > 1 ? prevId - 1 : 251)); // Scroll up: Go back (-1)
+      lastWheelTime.current = now;
+    }
+  };
+
   if (!details) {
     return <div className="pokedex-entry-container"></div>;
   }
@@ -161,6 +178,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onWheel={handleWheel}
     >
       {/* Top Half */}
       <div className="top-half">
@@ -192,7 +210,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
 
       {/* Center Separator */}
       <div className="separator-line">
-       <div className="page-tab">{pageVersions[pageIndex]}</div>
+       <div className={`page-tab tab-${pageVersions[pageIndex].toLowerCase()}`}>{pageVersions[pageIndex]}</div>
       </div>
 
       {/* Bottom Half (Description) */}

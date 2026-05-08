@@ -129,10 +129,25 @@
   left: 0;
   background-color: var(--gb-black);
   color: var(--gb-white);
-  border: 3px solid var(--gb-red-border);
+  border: 2px solid;
   /* White border */
   padding: 2px 2px;
-  font-size: 4px;
+  font-size: 4.5px;
+}
+
+.page-tab.tab-gold {
+  border-color: var(--gb-gold-border);
+  background-color: var(--gb-gold-bg);
+}
+
+.page-tab.tab-silver {
+  border-color: var(--gb-silver-border);
+  background-color: var(--gb-silver-bg);
+}
+
+.page-tab.tab-crystal {
+  border-color: var(--gb-crystal-border);
+  background-color: var(--gb-crystal-bg);
 }
 
 /* Bottom Half */

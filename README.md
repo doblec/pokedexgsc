@@ -23,7 +23,8 @@ This project is built using **React (Vite)** and pure **CSS3** (no external UI l
 - **`X`:** Go back to the main list.
 
 ### Mouse
-- **Hover / Scroll:** Navigate the list.
+- **Hover:** Navigate the list.
+- **Scroll (Mouse Wheel):** Scroll through the list, or cycle to the next/previous Pokémon in the details view.
 - **Left Click:** Select an item or menu option.
 
 ### Touch
