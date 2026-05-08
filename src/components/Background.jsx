@@ -1,18 +1,13 @@
 import gbCover from '../assets/bg/gbcover.png';
 import './Background.css';
 
-export default function Background({ scale = 1, hue = 0, offsetX = 0, offsetY = 0, lightX, lightY }) {
+export default function Background({ scale = 1, hue = 0, offsetX = 0, offsetY = 0, lightX, lightY, radius = 14 }) {
   return (
-    <div 
-      className="gb-background"
-      style={{ 
-        transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`
-      }}
-    >
+    <div className="gb-background">
       <div
         className="gb-image-wrapper"
         style={{
-          transform: `scale(${scale})`,
+          transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`,
           position: 'relative'
         }}
       >
@@ -25,7 +20,12 @@ export default function Background({ scale = 1, hue = 0, offsetX = 0, offsetY = 
         {lightX !== undefined && lightY !== undefined && (
           <div 
             className="gb-power-light"
-            style={{ left: `${lightX}px`, top: `${lightY}px` }}
+            style={{ 
+              left: `${lightX}px`, 
+              top: `${lightY}px`,
+              width: `${radius}px`,
+              height: `${radius}px`
+            }}
           />
         )}
       </div>

@@ -22,12 +22,13 @@ function App() {
   return (
     <div className="app-container">
       <Background 
-        scale={1.35} 
+        scale={2.2} 
         hue={0} 
         offsetX={0} 
         offsetY={450} 
-        lightX={83} 
-        lightY={263} 
+        lightX={51} 
+        lightY={162} 
+        radius={13}
       />
 
       {/* Physical screen container */}

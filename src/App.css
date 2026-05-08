@@ -1,9 +1,11 @@
 .app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 20px;
-  position: relative; /* Allows absolute positioning of the background */
 }
 
 .gameboy-screen {
@@ -14,9 +16,11 @@
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.5);
   overflow: hidden;
-  position: relative;
-  transform: scale(2);
-  margin: 144px 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  z-index: 10;
 }
 
 .screen-content {
@@ -32,8 +36,11 @@
 }
 
 .instructions {
+  position: absolute;
+  bottom: 20px;
   color: var(--text-muted);
   font-family: sans-serif;
   text-align: center;
   font-size: 0.8rem;
+  z-index: 10;
 }

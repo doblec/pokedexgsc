@@ -6,6 +6,8 @@ import './PokemonList.css';
 
 export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
   const listRef = useRef(null);
+  const blockScrollRef = useRef(false);
+  const lastMousePos = useRef({ x: 0, y: 0 });
   const [spriteSrc, setSpriteSrc] = useState(null);
   const [isSpriteLoading, setIsSpriteLoading] = useState(true);
 
@@ -40,7 +42,7 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
 
   // Auto-scroll to keep selection visible
   useEffect(() => {
-    if (listRef.current) {
+    if (listRef.current && !blockScrollRef.current) {
       const container = listRef.current;
       const selectedElement = container.querySelector('.selected');
       if (selectedElement) {
@@ -48,7 +50,7 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
         const elementTop = selectedElement.offsetTop;
         const elementHeight = selectedElement.offsetHeight;
         const containerHeight = container.clientHeight;
-        container.scrollTop = elementTop - (containerHeight / 2) + (elementHeight / 2);
+        container.scrollTop = Math.round(elementTop - (containerHeight / 2) + (elementHeight / 2));
       }
     }
   }, [selectedId]);
@@ -58,15 +60,19 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
+        blockScrollRef.current = false;
         onSelect(prev => (prev < list.length ? prev + 1 : prev));
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
+        blockScrollRef.current = false;
         onSelect(prev => (prev > 1 ? prev - 1 : prev));
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
+        blockScrollRef.current = false;
         onSelect(prev => Math.min(prev + 10, list.length));
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
+        blockScrollRef.current = false;
         onSelect(prev => Math.max(prev - 10, 1));
       } else if (e.key.toLowerCase() === 'z') {
         onConfirm(selectedId);
@@ -81,12 +87,14 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
   // Handle mouse pagination
   const handleContextMenu = (e) => {
     e.preventDefault(); // Prevent native browser menu from opening
+    blockScrollRef.current = false;
     onSelect(prev => Math.min(prev + 10, list.length));
   };
 
   const handleListLeftClick = (e) => {
     // Ignore if clicking a pokemon item (let the item's onClick handle it)
     if (e.target.closest('.list-item')) return;
+    blockScrollRef.current = false;
     onSelect(prev => Math.max(prev - 10, 1));
   };
 
@@ -132,6 +140,14 @@ export default function PokemonList({ list, selectedId, onSelect, onConfirm }) {
             <div 
               key={pokemon.id} 
               className={`list-item ${pokemon.id === selectedId ? 'selected' : ''}`}
+              onMouseMove={(e) => {
+                if (e.clientX === lastMousePos.current.x && e.clientY === lastMousePos.current.y) return;
+                lastMousePos.current = { x: e.clientX, y: e.clientY };
+                if (pokemon.id !== selectedId) {
+                  blockScrollRef.current = true;
+                  onSelect(pokemon.id);
+                }
+              }}
               onClick={() => { onSelect(pokemon.id); onConfirm(pokemon.id); }}
             >
               {pokemon.id === selectedId && (

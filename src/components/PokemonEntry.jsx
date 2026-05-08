@@ -130,6 +130,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
         <div className="menu-pill">
           <div 
             className="menu-item-wrapper clickable" 
+            onMouseEnter={() => setMenuSelection(0)}
             onClick={() => { setMenuSelection(0); handlePageChange(); }}
           >
             {menuSelection === 0 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
@@ -140,6 +141,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
             <div 
               className="menu-item-wrapper clickable" 
               onClick={() => setMenuSelection(1)}
+              onMouseEnter={() => setMenuSelection(1)}
             >
               {menuSelection === 1 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
               <span>AREA</span>
@@ -148,6 +150,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
           
           <div 
             className="menu-item-wrapper clickable" 
+            onMouseEnter={() => setMenuSelection(2)}
             onClick={() => { setMenuSelection(2); playCry(); }}
           >
             {menuSelection === 2 && <img src={whiterowSprite} className="menu-cursor" alt="" />}
@@ -156,6 +159,7 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
           
           <div 
             className="menu-item-wrapper clickable" 
+            onMouseEnter={() => setMenuSelection(3)}
             onClick={() => { setMenuSelection(3); toggleShiny(); }}
           >
             {menuSelection === 3 && <img src={whiterowSprite} className="menu-cursor" alt="" />}

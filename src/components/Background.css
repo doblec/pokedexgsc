@@ -1,23 +1,21 @@
 .gb-background {
-  position: absolute;
-  top: 288px;
+  position: fixed;
+  top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   z-index: -1;
   pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .gb-background-image {
   image-rendering: pixelated;
   display: block;
+  height: 100vh; /* Reserva de espacio estricta para evitar CLS */
+  width: auto;
 }
 
 .gb-power-light {
   position: absolute;
-  width: 17px;
-  height: 17px;
   background-color: var(--gb-light-core);
   border-radius: 100%;
   box-shadow: 0 0 5px var(--gb-light-glow), 

@@ -36,7 +36,7 @@
 .entry-sprite-box {
   width: 100px;
   aspect-ratio: 1;
-  background-color: var(--gb-white);
+  background-color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: flex-end;
