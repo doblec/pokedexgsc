@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { usePokemonDetails } from '../hooks/usePokemon';
 import whiterowSprite from '../assets/sprites/whiterow.png';
 import './PokemonEntry.css';
+import clickSfx from '../assets/sfx/click.mp3';
 
 export default function PokemonEntry({ id, onBack, onIdChange }) {
   const { details, loading } = usePokemonDetails(id);
@@ -79,12 +80,20 @@ export default function PokemonEntry({ id, onBack, onIdChange }) {
     }
   }, [details?.cry]);
 
+  const playClickSound = () => {
+    const audio = new Audio(clickSfx);
+    audio.volume = 0.5;
+    audio.play().catch(e => console.log("Audio play failed", e));
+  };
+
   const handlePageChange = () => {
+    playClickSound();
     // Cycle through the 3 descriptions (0, 1, 2)
     setPageIndex(prevIndex => (prevIndex + 1) % 3);
   };
 
   const toggleShiny = () => {
+    playClickSound();
     setIsShiny(prev => !prev);
   };
 
